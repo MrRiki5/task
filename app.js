@@ -14,9 +14,10 @@ app.use(router.allowedMethods());
 
 async function cheak() {
 	let timeNow = new Date();
+	let timeTwoHour = new Date(timeNow.getTime() + 2 * 60 * 60 * 1000);
 	let timePlusDay = new Date(timeNow.getTime() + 24 * 60 * 60 * 1000);
 	const result = await db.any(`SELECT * FROM public."Users" WHERE select_time > $1 AND select_time < $2 OR select_time > $3 AND select_time < $4`,
-		[timeNow, new Date(timeNow.getTime() + 60000), timePlusDay, new Date(timePlusDay.getTime() + 60000)]);
+		[timeTwoHour, new Date(timeTwoHour.getTime() + 60000), timePlusDay, new Date(timePlusDay.getTime() + 60000)]);
 	if (result) {
 		for (let i = 0; i < result.length; i++) {
 			let data = `${timeNow.toString()} | Привет ${result[i].name}!`;
