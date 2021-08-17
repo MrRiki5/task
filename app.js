@@ -22,7 +22,7 @@ async function cheak() {
 		for (let i = 0; i < result.length; i++) {
 			let data = `${timeNow.toString()} | Привет ${result[i].name}!`;
 			let doctorSpec = await db.one(`SELECT specialization FROM public."Doctors" WHERE id=$1`, [result[i].doctor_id]);
-			if (result[i].select_time.getDate() === timeNow.getDate()) {
+			if (result[i].select_time.getDate() !== timeNow.getDate()) {
 				data += `Напоминаем что вы записаны к ${doctorSpec.specialization} завтра в ${result[i].select_time.getHours() + ':' + result[i].select_time.getMinutes()}!`
 			} else {
 				data += `Вам через 2 часа к ${doctorSpec.specialization} завтра в ${result[i].select_time.getHours() + ':' + result[i].select_time.getMinutes()}!`
