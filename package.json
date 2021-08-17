@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "nodemon app.js",
-		"prefill": "node_modules/.bin/db-migrate up  -m ./config/migrations  --config ./config/database.json",
+		"prefill": "node node_modules/db-migrate/bin/db-migrate up  -m ./config/migrations  --config ./config/database.json",
 		"dev": "node app.js"
 	},
 	"keywords": [],
